@@ -1,37 +1,40 @@
 
 public class Fish extends Animal {
 
-	private static final int STAMINAMAX = 20;
-	private static final int HUNGERMAX = 25;
+	private static final int STAMINAMAX = 20;//max stamina for every fish
+	private static final int HUNGERMAX = 25;//max hunger for every fish
 
 	private boolean alive;
 	private int staminaLvl;
 	private int hungerLvl;
 	private String name;
 
+	//default constructor
 	public Fish() {
 		alive = true;
 		staminaLvl = 15;
 		hungerLvl = 20;
 		name = "Sushi";
-	}// works
+	}
 
+	//constructor
+	//@param name of fish
 	public Fish(String name) {
 		alive = true;
 		staminaLvl = 15;
 		hungerLvl = 20;
 		this.name = name;
-	}// works
+	}
 
-	// Restores a fish's stamina
+	//Fully restores a fish's stamina
 	public void rest() {
 		if (alive)
 			staminaLvl = STAMINAMAX;
 		else
 			System.out.println(name + " will be resting for all ethernity, considering it is dead.");
-	}//works
+	}
 
-	// Restores some of the fish's hunger
+	//Restores 2 of a fish's hunger
 	public void eat() {
 		if (alive && (hungerLvl <= (HUNGERMAX - 2))) {
 			hungerLvl += 2;
@@ -39,36 +42,12 @@ public class Fish extends Animal {
 			hungerLvl = HUNGERMAX;
 		} else if (!(alive)) {
 			System.out.println(name + " is dead so it cannot eat.");
-		}//works
+		}
 	}
 
-/*
- * This method has been axed for the time being.
- * 
-	// A fish attempt to eat another fish
-	// @param fish a fish object
-	public void eat(Fish fish) {
-		if (fish != null) {
-//		if (this.equals(fish) != true) {
-			if (alive && (fish.isAlive()) && (this.stamina >= fish.getStamina())) {//the fish trying to eat the other has to be alive and have more stamina than the other fish
-				hunger = HUNGERMAX;
-				fish.kill();
-				fish = null;
-			} else if (alive && !(fish.isAlive())) {
-				hunger = HUNGERMAX;
-				fish = null;
-			} else if (alive == false) {
-				System.out.println(name + " is dead so it cannot eat.");
-			} else if (stamina < fish.getStamina()) {
-				System.out.println(name + " is too tired to eat " + fish.getName());
-			}
-		} else if (fish == null)
-			System.out.println("There is no fish to eat. It was probably already eaten.");
-	}
-*/
-	
-	// A fish swims using some stamina and hunger (if the fish has no stamina or
-	// hunger it dies)
+
+	//A fish swims using 3 stamina and 2 hunger
+	//if a fish's staminaLvl and hungerLvl is 0 when it tries to swim it dies
 	public void swim() {
 		if (!(alive))
 			System.out.println("A dead fish cannot swim. In case you did not know " + name + " is dead.");
@@ -87,49 +66,69 @@ public class Fish extends Animal {
 		}
 	}
 
+	//Kills a fish (sets alive to false if already true)
+	//Displays text showing the fish has died
 	public void kill() {
-		alive = false;
-		staminaLvl = 0;
-		hungerLvl = 0;
-		System.out.println(name + " has died.");
-	}//works
+		if (alive == true) {
+			alive = true;
+			staminaLvl = 0;
+			hungerLvl = 0;
+			System.out.println(name + " has died.");
+		} else
+			System.out.println(name + " is already dead.")
+	}
 
+	//Brings a fish back to life (sets alive to true if already alive is false)
+	//Displays text showing the fish is alive along with its current staminaLvl and hungerLvl
 	public void revive() {
-		alive = true;
-		staminaLvl = 5;
-		hungerLvl = 5;
-		System.out.println(name + " was miraculously revived.\n" + this.toString());
+		if (alive == false) {
+			alive = true;
+			staminaLvl = 5;
+			hungerLvl = 5;
+			System.out.println(name + " was miraculously revived.\n" + this.toString());
+		} else
+			System.out.println(name + " is already alive.\n" + this.toString())
 	}
 	
+	//Checks whether a fish is alive
+	//@return alive variable
 	public boolean isAlive() {
 		return alive;
 	}
 
+	//Gets staminaLvl
+	//@return staminaLvl
 	public int getStamina() {
 		return staminaLvl;
-	}// works
+	}
 
+	//Gets hungerLvl
+	//@return hungerLvl
 	public int getHunger() {
 		return hungerLvl;
-	}// works
+	}
 
+	//Gets name
+	//@return name
 	public String getName() {
 		return name;
-	}// works
+	}
 
+	//Display a fish's name, staminal level, and hunger level (if the fish is alive)
 	public String toString() {
 		if (alive)
 			return name + ": Stamina lvl.: " + staminaLvl + " Hunger lvl.: " + hungerLvl;
 		else
 			return name + " is dead.";
-	}// works
+	}
 
+	//Checks if two fish objects are equal
 	public boolean equals(Fish fish) {
 		if ((this.name == fish.name) && (this.staminaLvl == fish.staminaLvl) && (this.hungerLvl == fish.hungerLvl)
 				&& (this.alive == fish.alive))
 			return true;
 		else
 			return false;
-	}// sort of works
+	}
 
 }
