@@ -7,10 +7,13 @@ public abstract class Animal {
 	//the higher the number the less hungry the animal is
 	private String name;
 
+	//will restore an animal's stamina
 	public abstract void rest();
 
+	//will restore some of an animal's hunger
 	public abstract void eat();
 	
+	//displays an animal's name stamina and hunger if they are alive
 	public String toString() {
 		if (alive)
 			return name + ": Stamina lvl.: " + staminaLvl + " Hunger lvl.: " + hungerLvl;
@@ -18,6 +21,7 @@ public abstract class Animal {
 			return name + " is dead.";
 	}
 	
+	//checks whether two animal objects are equal
 	public boolean equals(Animal animal) {
 		if ((this.name == animal.name) && (this.staminaLvl == animal.staminaLvl) && (this.hungerLvl == animal.hungerLvl)
 				&& (this.alive == animal.alive))
